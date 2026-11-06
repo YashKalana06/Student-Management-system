@@ -1,27 +1,50 @@
-# EduManage — Student Management System
+# 🎓 Student Management System
 
-A modern, responsive **frontend-only** Student Management System built with HTML, CSS and vanilla JavaScript.
+A modern and responsive Student Management System dashboard built using **HTML, CSS, and JavaScript**. This project provides a clean interface to manage student records through an interactive dashboard.
 
-## Features
-- Dashboard with student statistics
-- Student directory with search and course filter
-- Add, edit and delete student records
-- Responsive layout for desktop, tablet and mobile
-- Animated interactions, hover states and modal transitions
-- Sample records included for demonstration
+## 🌐 Live Demo
+[View Live Website](https://yashkalana06.github.io/Student-Management-system/)
 
-## Run locally
-1. Open this folder in Visual Studio Code.
-2. Install the **Live Server** extension if you do not already have it.
-3. Right-click `index.html`.
-4. Select **Open with Live Server**.
+## ✨ Features
+- Modern and responsive dashboard UI
+- Add new student records
+- Edit existing student details
+- Delete student records
+- Search students
+- Filter students by course
+- Attendance and course sections
+- Interactive UI with smooth transitions and hover effects
 
-## GitHub Pages
-1. Create a public GitHub repository.
-2. Upload `index.html`, `style.css`, `script.js` and `README.md` to the repository root.
-3. Open **Settings → Pages**.
-4. Under **Build and deployment**, select **Deploy from a branch**.
-5. Choose branch `main` and folder `/ (root)`, then Save.
+## 🛠️ Technologies Used
+- HTML5
+- CSS3
+- JavaScript
 
-## Important
-This is a frontend demo. Student records are stored in a JavaScript array and reset when the page is refreshed. No backend or database is used.
+## 📂 Project Structure
+```text
+Student-Management-System/
+│
+├── index.html
+├── style.css
+├── script.js
+└── README.md
+```
+
+## 🚀 How to Run Locally
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/YashKalana06/Student-Management-system.git
+   ```
+2. Open the project folder in VS Code.
+3. Run `index.html` using Live Server.
+
+## 📌 Project Information
+- **Project:** Student Management System
+- **Type:** Frontend Web Development
+- **Developer:** Yash Sharma
+- **Technologies:** HTML, CSS, JavaScript
+
+## ⚠️ Note
+This is a frontend-only demonstration project. Student records are managed in JavaScript and are not permanently stored in a database.
+
+---
