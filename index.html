@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A modern frontend student management dashboard." />
+  <title>EduManage — Student Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="EduManage home">
+        <span class="brand-mark"><i data-lucide="graduation-cap"></i></span>
+        <span>edu<span class="brand-light">manage</span></span>
+      </a>
+
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-menu">
+        <button class="nav-link active" data-view="dashboard"><i data-lucide="layout-dashboard"></i><span>Overview</span></button>
+        <button class="nav-link" data-view="students"><i data-lucide="users"></i><span>Students</span><span class="nav-count" id="navStudentCount">8</span></button>
+        <button class="nav-link" data-view="attendance"><i data-lucide="calendar-check"></i><span>Attendance</span></button>
+        <button class="nav-link" data-view="courses"><i data-lucide="book-open"></i><span>Courses</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-icon"><i data-lucide="sparkles"></i></div>
+          <strong>Need a hand?</strong>
+          <p>Your student workspace, made simple.</p>
+          <button class="help-button" id="helpButton">Explore tips <i data-lucide="arrow-up-right"></i></button>
+        </div>
+        <button class="profile-mini" id="profileButton">
+          <span class="avatar avatar-purple">YS</span>
+          <span class="profile-copy"><strong>Yash Sharma</strong><small>Administrator</small></span>
+          <i data-lucide="chevrons-up-down"></i>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button mobile-menu" id="menuToggle" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
+          <div class="breadcrumb"><span>Workspace</span><i data-lucide="chevron-right"></i><strong id="breadcrumbCurrent">Overview</strong></div>
+        </div>
+        <div class="topbar-actions">
+          <div class="date-chip"><i data-lucide="calendar-days"></i><span id="todayDate">Today</span></div>
+          <button class="icon-button notification-button" aria-label="Notifications" id="notificationButton"><i data-lucide="bell"></i><span></span></button>
+          <div class="top-avatar avatar avatar-purple">YS</div>
+        </div>
+      </header>
+
+      <section class="page-view active-view" id="dashboardView">
+        <div class="welcome-row">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR CAMPUS AT A GLANCE</div>
+            <h1>Good morning, Yash <span class="wave">✦</span></h1>
+            <p class="page-subtitle">Here’s what’s happening with your students today.</p>
+          </div>
+          <button class="primary-button" id="addStudentTop"><i data-lucide="plus"></i> Add student</button>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card stat-primary">
+            <div class="stat-top"><span class="stat-label">Total students</span><span class="stat-icon"><i data-lucide="users"></i></span></div>
+            <div class="stat-value" id="totalStudents">08</div>
+            <div class="stat-foot"><span class="trend positive"><i data-lucide="trending-up"></i> Active records</span><span class="stat-note">Across all courses</span></div>
+            <div class="stat-glow"></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span class="stat-label">Male students</span><span class="stat-icon icon-blue"><i data-lucide="user-round"></i></span></div>
+            <div class="stat-value" id="maleStudents">05</div>
+            <div class="stat-foot"><span class="mini-dot blue-dot"></span><span class="stat-note">Student profile count</span></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span class="stat-label">Female students</span><span class="stat-icon icon-pink"><i data-lucide="user-round"></i></span></div>
+            <div class="stat-value" id="femaleStudents">03</div>
+            <div class="stat-foot"><span class="mini-dot pink-dot"></span><span class="stat-note">Student profile count</span></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span class="stat-label">Courses</span><span class="stat-icon icon-green"><i data-lucide="book-open"></i></span></div>
+            <div class="stat-value" id="courseCount">04</div>
+            <div class="stat-foot"><span class="trend neutral"><i data-lucide="layers"></i> Available</span><span class="stat-note">Academic programs</span></div>
+          </article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel students-panel">
+            <div class="panel-heading">
+              <div><h2>Recently added students</h2><p>A quick look at your student directory.</p></div>
+              <button class="text-button" data-goto="students">View all <i data-lucide="arrow-up-right"></i></button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>STUDENT</th><th>ROLL NUMBER</th><th>COURSE</th><th>STATUS</th></tr></thead>
+                <tbody id="recentStudents"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel activity-panel">
+            <div class="panel-heading"><div><h2>Quick insights</h2><p>Your directory snapshot.</p></div><span class="panel-more"><i data-lucide="ellipsis"></i></span></div>
+            <div class="insight-block">
+              <div class="insight-icon insight-violet"><i data-lucide="graduation-cap"></i></div>
+              <div class="insight-copy"><strong id="topCourse">Computer Science</strong><span>Most represented course</span></div>
+              <span class="insight-number" id="topCourseCount">04</span>
+            </div>
+            <div class="insight-block">
+              <div class="insight-icon insight-cyan"><i data-lucide="user-plus"></i></div>
+              <div class="insight-copy"><strong>Student directory</strong><span>Ready to grow</span></div>
+              <span class="insight-number">＋</span>
+            </div>
+            <div class="tip-box"><i data-lucide="lightbulb"></i><p><strong>Quick tip</strong><br>Keep student details up to date to make your directory easier to manage.</p></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="page-view" id="studentsView">
+        <div class="welcome-row compact-welcome">
+          <div><div class="eyebrow"><span class="eyebrow-dot"></span> DIRECTORY</div><h1>Student directory</h1><p class="page-subtitle">Manage, search and organize your student records.</p></div>
+          <button class="primary-button" id="addStudentDirectory"><i data-lucide="plus"></i> Add student</button>
+        </div>
+        <section class="panel directory-panel">
+          <div class="directory-toolbar">
+            <div><h2>All students <span class="count-pill" id="directoryCount">08</span></h2><p>Student information and enrollment details.</p></div>
+            <div class="toolbar-controls">
+              <label class="search-box"><i data-lucide="search"></i><input id="searchInput" type="search" placeholder="Search students..." /></label>
+              <select id="courseFilter" class="filter-select" aria-label="Filter by course"><option value="all">All courses</option><option>Computer Science</option><option>Information Technology</option><option>Mechanical</option><option>Electronics</option></select>
+            </div>
+          </div>
+          <div class="table-wrap directory-table-wrap">
+            <table>
+              <thead><tr><th>STUDENT</th><th>ROLL NUMBER</th><th>COURSE</th><th>SEMESTER</th><th>EMAIL</th><th>STATUS</th><th>ACTION</th></tr></thead>
+              <tbody id="studentTableBody"></tbody>
+            </table>
+            <div class="empty-state hidden" id="emptyState"><span><i data-lucide="search-x"></i></span><strong>No students found</strong><p>Try another search or add a new student.</p></div>
+          </div>
+          <div class="table-footer"><span id="showingText">Showing 8 students</span><span class="footer-note">Frontend demo · Sample records</span></div>
+        </section>
+      </section>
+
+      <section class="page-view" id="attendanceView">
+        <div class="welcome-row compact-welcome"><div><div class="eyebrow"><span class="eyebrow-dot"></span> ACADEMICS</div><h1>Attendance overview</h1><p class="page-subtitle">A simple attendance snapshot for your demo workspace.</p></div></div>
+        <div class="feature-grid">
+          <article class="feature-card"><span class="feature-icon icon-green"><i data-lucide="calendar-check"></i></span><h3>Attendance tracking</h3><p>Attendance management can be connected to student records in a future version.</p><span class="coming-soon">DEMO MODULE</span></article>
+          <article class="feature-card"><span class="feature-icon icon-blue"><i data-lucide="chart-no-axes-combined"></i></span><h3>Attendance insights</h3><p>Use this space to present attendance summaries and class-wise reports.</p><span class="coming-soon">DEMO MODULE</span></article>
+        </div>
+      </section>
+
+      <section class="page-view" id="coursesView">
+        <div class="welcome-row compact-welcome"><div><div class="eyebrow"><span class="eyebrow-dot"></span> ACADEMICS</div><h1>Courses</h1><p class="page-subtitle">Explore the academic programs in this demo.</p></div></div>
+        <div class="course-grid" id="courseGrid"></div>
+      </section>
+
+      <footer class="footer"><span>© 2026 EduManage</span><span>Designed for smarter campus management <span class="footer-heart">✦</span></span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="studentModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-heading"><div><span class="modal-kicker">STUDENT PROFILE</span><h2 id="modalTitle">Add new student</h2><p>Enter the details to create a student record.</p></div><button class="icon-button close-modal" id="closeModal" aria-label="Close"><i data-lucide="x"></i></button></div>
+      <form id="studentForm">
+        <input type="hidden" id="editId">
+        <div class="form-grid">
+          <label class="form-field full-field"><span>Full name</span><input id="studentName" required maxlength="60" placeholder="e.g. Aarav Sharma"></label>
+          <label class="form-field"><span>Roll number</span><input id="studentRoll" required maxlength="20" placeholder="e.g. 25EGJCS101"></label>
+          <label class="form-field"><span>Course</span><select id="studentCourse" required><option value="">Select course</option><option>Computer Science</option><option>Information Technology</option><option>Mechanical</option><option>Electronics</option></select></label>
+          <label class="form-field"><span>Semester</span><select id="studentSemester" required><option value="">Select semester</option><option>1st Semester</option><option>2nd Semester</option><option>3rd Semester</option><option>4th Semester</option><option>5th Semester</option><option>6th Semester</option><option>7th Semester</option><option>8th Semester</option></select></label>
+          <label class="form-field"><span>Gender</span><select id="studentGender" required><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option></select></label>
+          <label class="form-field full-field"><span>Email address</span><input id="studentEmail" type="email" required placeholder="student@example.com"></label>
+        </div>
+        <div class="form-actions"><button type="button" class="secondary-button" id="cancelModal">Cancel</button><button type="submit" class="primary-button"><i data-lucide="check"></i><span id="submitLabel">Add student</span></button></div>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast"><span class="toast-icon"><i data-lucide="check"></i></span><span id="toastMessage">Student added successfully</span></div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="script.js"></script>
+</body>
+</html>
